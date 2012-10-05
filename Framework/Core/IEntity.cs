@@ -12,6 +12,8 @@ namespace mancomb.Framework.Core
             void addAttribute(String key, Object value);
             
             Object getAttribute(String key);
+
+            T getTypedAttribute<T>(string p);
             
             //Behaviours
             void addBehaviour(int order, IBehaviour behaviour);

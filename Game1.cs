@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using mancomb.Framework.Core;
 using mancomb.Framework.Behaviours;
+using mancomb.GameComponents.Factories;
 
 namespace mancomb
 {
@@ -36,13 +37,9 @@ namespace mancomb
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            IEntity background = new BaseEntity();
-            background.addAttribute("color", Color.Yellow);
-            background.addBehaviour(10, new RandomColorBehaviour());
-            background.addBehaviour(20, new FadeColorBehaviour());
-            background.addBehaviour(100, new DrawBehaviour(ref graphics));
-            entities.Add(background);
+            entities.Add(EntityFactory.createBackground(ref graphics));
+            
+            entities.Add(EntityFactory.createShip(ref graphics, this.Content));
             
             base.Initialize();
             
@@ -55,7 +52,7 @@ namespace mancomb
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            
             
             // TODO: use this.Content to load your game content here
         }

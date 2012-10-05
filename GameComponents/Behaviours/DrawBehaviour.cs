@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using mancomb.Framework.Core;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace mancomb.Framework.Behaviours
 {
@@ -14,6 +15,7 @@ namespace mancomb.Framework.Behaviours
         public DrawBehaviour(ref GraphicsDeviceManager gdm)
         {
             this.gdm = gdm;
+            
         }
 
         public override void doBehaviour(IEntity parent)

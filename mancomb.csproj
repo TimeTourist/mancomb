@@ -115,19 +115,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\Behaviours\FadeColorBehaviour.cs" />
-    <Compile Include="Framework\Behaviours\RandomColorBehaviour.cs" />
-    <Compile Include="Framework\Behaviours\DrawBehaviour.cs" />
+    <Compile Include="GameComponents\Behaviours\DrawTexture2DBehaviour.cs" />
+    <Compile Include="GameComponents\Behaviours\FadeColorBehaviour.cs" />
+    <Compile Include="GameComponents\Behaviours\RandomColorBehaviour.cs" />
+    <Compile Include="GameComponents\Behaviours\DrawBehaviour.cs" />
     <Compile Include="Framework\Core\BaseBehaviour.cs" />
     <Compile Include="Framework\Core\BaseEntity.cs" />
     <Compile Include="Framework\Core\IBehaviour.cs" />
     <Compile Include="Framework\Core\IEntity.cs" />
     <Compile Include="Framework\Test\NativeTests.cs" />
+    <Compile Include="GameComponents\Factories\EntityFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Framework\Test\ship.png" />
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>

@@ -41,6 +41,11 @@ namespace mancomb.Framework.Core
             return attributes[key];
         }
 
+        public T getTypedAttribute<T>(string key)
+        {
+            return (T)attributes[key];
+        }
+
         public void runBehaviours()
         {
             foreach (IBehaviour behaviour in behaviours.Values)
