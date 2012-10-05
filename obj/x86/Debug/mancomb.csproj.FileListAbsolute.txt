@@ -1,9 +1,0 @@
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\bin\x86\Debug\mancomb.exe
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\bin\x86\Debug\mancomb.pdb
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\bin\x86\Debug\nunit.framework.dll
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\bin\x86\Debug\nunit.mocks.dll
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\bin\x86\Debug\nunit.framework.xml
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\obj\x86\Debug\mancomb.exe
-C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\obj\x86\Debug\mancomb.pdb
