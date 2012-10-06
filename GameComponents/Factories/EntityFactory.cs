@@ -46,9 +46,11 @@ namespace mancomb.GameComponents.Factories
             ship.addAttribute("Texture", Texture);
             
             //behaviours
+            ship.addBehaviour(GameLoopPhase.Update, new GameControllingBehavior());
             ship.addBehaviour(GameLoopPhase.Draw, new DrawTexture2DBehaviour());
 
             return ship;
         }
+
     }
 }

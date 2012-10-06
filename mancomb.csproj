@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="EntitiesManager.cs" />
     <Compile Include="Framework\Core\GameLoopPhase.cs" />
+    <Compile Include="GameComponents\Behaviours\GameControllingBehavior.cs" />
     <Compile Include="GameComponents\Behaviours\XnaContentLoadingBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\DrawTexture2DBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\FadeColorBehaviour.cs" />

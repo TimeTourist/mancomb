@@ -15,7 +15,11 @@ namespace mancomb.Framework.Core
         ///  Attributes can be updated and changed by all behaviours in the entity. 
         ///  Some behaviours are dependent that certain attributes are set.
         /// </summary>
-        Dictionary<String, Object> attributes = new Dictionary<String, Object>();
+        public Dictionary<String, Object> attributes
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Behaviours change attributes of an entity. They may also broadcast game 
@@ -31,6 +35,7 @@ namespace mancomb.Framework.Core
         public BaseEntity(EntitiesManager entityManager)
         {
             this.entityManager = entityManager;
+            this.attributes = new Dictionary<String, Object>();
         }
 
         public EntitiesManager getManager()

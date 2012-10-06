@@ -8,6 +8,10 @@ namespace mancomb.Framework.Core
 {
     interface IEntity
     {
+        // could be done if the getAttribute is slow.
+        // public Dictionary<String, Object> attributes { get; set; }
+
+
         /// <summary>
         /// Attributes can be shared with all behaviors in the entity. 
         /// </summary>
