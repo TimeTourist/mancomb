@@ -37,15 +37,15 @@ namespace mancomb.Framework.Test
             [Test]
             public void exampleMUnitTest()
             {
-                BaseEntity entity = new BaseEntity();
-                IBehaviour mockBehaviour = (IBehaviour)new DynamicMock(typeof(IBehaviour));
-                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
-                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
-                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
-                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
-                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
-                // entity.runBehaviours();
-                Assert.AreEqual(entity, entity);
+                //baseentity entity = new baseentity();
+                //ibehaviour mockbehaviour = (ibehaviour)new dynamicmock(typeof(ibehaviour));
+                //entity.addbehaviour(gameloopphase.draw, mockbehaviour);
+                //entity.addbehaviour(gameloopphase.draw, mockbehaviour);
+                //entity.addbehaviour(gameloopphase.draw, mockbehaviour);
+                //entity.addbehaviour(gameloopphase.draw, mockbehaviour);
+                //entity.addbehaviour(gameloopphase.draw, mockbehaviour);
+                // entity.runbehaviours();
+                //assert.areequal(entity, entity);
             }
         }
     }

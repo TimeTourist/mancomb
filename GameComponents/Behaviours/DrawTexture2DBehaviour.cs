@@ -10,29 +10,23 @@ namespace mancomb.GameComponents.Behaviours
 {
     class DrawTexture2DBehaviour : BaseBehaviour
     {
-        GraphicsDeviceManager gdm;
-        SpriteBatch spriteBatch;
-
-        public DrawTexture2DBehaviour(ref GraphicsDeviceManager gdm)
+        public DrawTexture2DBehaviour()
         {
-            this.gdm = gdm;
-            this.spriteBatch = new SpriteBatch(gdm.GraphicsDevice);
-
+            
         }
 
         public override void doBehaviour(IEntity parent)
         {
+            // probably not a good place to have Textures... They get big, and are copied here, 
+            // better have them stored somewhare for direct access.
             Texture2D Texture = parent.getAttribute<Texture2D>("Texture");
             Vector2 Pos = parent.getAttribute<Vector2>("Pos");
             float Direction = parent.getAttribute<float>("Direction");
            
             Vector2 origin = new Vector2(Texture.Width / 2, Texture.Height - Texture.Height / 3);
 
-            spriteBatch.Begin();
-            //spriteBatch.Draw(Texture, Pos, Color.White);
+            parent.getManager().game.spriteBatch.Draw(Texture, Pos, null, Color.White, Direction, origin, 0.5f, SpriteEffects.None, 0f);
 
-            spriteBatch.Draw(Texture, Pos, null, Color.White, Direction, origin, 0.5f, SpriteEffects.None, 0f);
-            spriteBatch.End();
         }
 
     }

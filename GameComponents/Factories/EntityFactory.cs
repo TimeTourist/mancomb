@@ -14,26 +14,23 @@ namespace mancomb.GameComponents.Factories
 {
     class EntityFactory
     {
-        public static IEntity createBackground(ref GraphicsDeviceManager graphics)
+        public static IEntity createBackground(EntitiesManager manager)
         {
-            IEntity background = new BaseEntity();
+            IEntity background = new BaseEntity(manager);
             background.addAttribute("color", Color.Yellow);
             background.addAttribute("gameTime", new GameTime());
             background.addBehaviour(GameLoopPhase.Update, new RandomColorBehaviour());
             background.addBehaviour(GameLoopPhase.Update, new FadeColorBehaviour());
-            background.addBehaviour(GameLoopPhase.Draw, new DrawBehaviour(ref graphics));
+            background.addBehaviour(GameLoopPhase.Draw, new DrawBehaviour());
             return background;
         }
 
-        public static IEntity createShip(ref GraphicsDeviceManager graphics, 
-            //ref GamePadState gamePadState, 
-            //ref KeyboardState keyboardState,
-            ContentManager content)
+        public static IEntity createShip(EntitiesManager manager)
         {
-            IEntity ship = new BaseEntity();
+            IEntity ship = new BaseEntity(manager);
             Vector2 Pos = new Vector2();
-            Pos.X = graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 8;
-            Pos.Y = graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 8;
+            Pos.X = manager.game.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 8;
+            Pos.Y = manager.game.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 8;
             Vector2 Velocity = new Vector2();
             float Weight = 40f;
             float Direction = 0;
@@ -45,11 +42,11 @@ namespace mancomb.GameComponents.Factories
             ship.addAttribute("Direction", Direction);
 
             //for drawing
-            Texture2D Texture = content.Load<Texture2D>("ship");
+            Texture2D Texture = manager.game.Content.Load<Texture2D>("ship");
             ship.addAttribute("Texture", Texture);
             
             //behaviours
-            ship.addBehaviour(GameLoopPhase.Draw, new DrawTexture2DBehaviour(ref graphics));
+            ship.addBehaviour(GameLoopPhase.Draw, new DrawTexture2DBehaviour());
 
             return ship;
         }

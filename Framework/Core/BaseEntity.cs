@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using NUnit.Mocks;
 
 namespace mancomb.Framework.Core
 {
@@ -22,11 +23,19 @@ namespace mancomb.Framework.Core
         /// </summary>
         Dictionary<GameLoopPhase, List<IBehaviour>> behaviours = new Dictionary<GameLoopPhase, List<IBehaviour>>();
 
+        EntitiesManager entityManager;
+
         /// <summary>
         /// 
         /// </summary>
-        public BaseEntity()
+        public BaseEntity(EntitiesManager entityManager)
         {
+            this.entityManager = entityManager;
+        }
+
+        public EntitiesManager getManager()
+        {
+            return entityManager;
         }
 
         public void addBehaviour(GameLoopPhase phase, IBehaviour behaviourToAdd)
@@ -52,7 +61,7 @@ namespace mancomb.Framework.Core
         /// Using this debug we will notice this early, instead of getting a key not found later... 
         /// This is due to the extremly loose coupling of Attributes and Behaviours. Only way I can think of 
         /// is to check at runtime.
-        /// Not sure how to implement this yet... Maybe a list of "required attributes" in the behaviour.
+        /// Not sure how to implement this yet... 
         /// 
         /// For debugging only.
         /// Verify that all attributes in the entity that are needed by the behaviour 
@@ -95,10 +104,10 @@ namespace mancomb.Framework.Core
         /// <returns>Attribute Value</returns>
         public T getAttribute<T>(string key)
         {
-            return (T)attributes[key];
+             return (T)attributes[key];
         }
 
-        public void runBehaviours(EntitiesManager entityManager, GameLoopPhase phase)
+        public void runBehaviours(GameLoopPhase phase)
         {
             List<IBehaviour> entityBehaviours;
             if (behaviours.TryGetValue(phase, out entityBehaviours))

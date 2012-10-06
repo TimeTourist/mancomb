@@ -19,8 +19,15 @@ namespace mancomb
         /// </summary>
         List<IEntity> entities;
 
-        public EntitiesManager()
+        public Game1 game
         {
+            get;
+            private set;
+        }
+
+        public EntitiesManager(Game1 game)
+        {
+            this.game = game;
             entities = new List<IEntity>();
         }
 
@@ -33,7 +40,7 @@ namespace mancomb
         {
             foreach (IEntity entity in entities)
             {
-                entity.runBehaviours(this, phase);
+                entity.runBehaviours(phase);
             }
         }
 

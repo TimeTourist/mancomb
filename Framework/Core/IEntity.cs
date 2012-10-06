@@ -29,6 +29,8 @@ namespace mancomb.Framework.Core
         /// </summary>
         /// <param name="entitiesManager">The managing object</param>
         /// <param name="phase">The phase we are in right now.</param>
-        void runBehaviours(EntitiesManager entityManager, GameLoopPhase phase);  
+        void runBehaviours(GameLoopPhase phase);
+
+        EntitiesManager getManager();
     }
 }

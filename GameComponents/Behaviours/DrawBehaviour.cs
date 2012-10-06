@@ -10,16 +10,13 @@ namespace mancomb.Framework.Behaviours
 {
     class DrawBehaviour : BaseBehaviour 
     {
-        GraphicsDeviceManager gdm;
-
-        public DrawBehaviour(ref GraphicsDeviceManager gdm)
+        public DrawBehaviour()
         {
-            this.gdm = gdm;  
         }
 
         public override void doBehaviour(IEntity parent)
         {
-            gdm.GraphicsDevice.Clear(parent.getAttribute<Color>("color"));
+            parent.getManager().game.GraphicsDevice.Clear(parent.getAttribute<Color>("color"));
         }
     }
 }

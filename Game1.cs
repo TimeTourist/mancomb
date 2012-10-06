@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using mancomb.Framework.Core;
 using mancomb.Framework.Behaviours;
 using mancomb.GameComponents.Factories;
+using System.Reflection;
 
 namespace mancomb
 {
@@ -21,11 +22,23 @@ namespace mancomb
     {
         GraphicsDeviceManager graphics;
         EntitiesManager entitiesManager;
+        public SpriteBatch spriteBatch;
+        // Reflection hack for accessing gameTime. Will it work?
+        public GameTime gameTime 
+        {
+            get; 
+            private set;
+        }
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            // create the entity manager
+            entitiesManager = new EntitiesManager(this);
             Content.RootDirectory = "Content";
+            
+            // Reflection hack for accessing gameTime. Will it work?
+            gameTime = (GameTime)typeof(Game).GetField("gameTime", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(this);
         }
 
         /// <summary>
@@ -36,11 +49,10 @@ namespace mancomb
         /// </summary>
         protected override void Initialize()
         {
-            // create the entity manager
-            entitiesManager = new EntitiesManager();
+            spriteBatch = new SpriteBatch(this.GraphicsDevice);
             // add some entities (Feature: load from script instead of factory)
-            entitiesManager.addEntity(EntityFactory.createBackground(ref graphics));
-            entitiesManager.addEntity(EntityFactory.createShip(ref graphics, this.Content));
+            entitiesManager.addEntity(EntityFactory.createBackground(entitiesManager));
+            entitiesManager.addEntity(EntityFactory.createShip(entitiesManager));
             // run the behaviours that want to run in this phase.
             entitiesManager.run(GameLoopPhase.Initialize);
             
@@ -75,7 +87,7 @@ namespace mancomb
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
+        protected override void Update(GameTime localGameTime)
         {
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -89,19 +101,21 @@ namespace mancomb
             // http://blog.diabolicalgame.co.uk/2011/12/gametime-in-another-thread.html
             // http://xboxforums.create.msdn.com/forums/p/10587/457840.aspx
 
-            base.Update(gameTime);
+            base.Update(localGameTime);
         }
 
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime localGameTime)
         {
+            // leaving this here for now...
+            spriteBatch.Begin();
             // run the behaviours that want to run in this phase.
             entitiesManager.run(GameLoopPhase.Draw);
-            
-            base.Draw(gameTime);
+            spriteBatch.End();
+            base.Draw(localGameTime);
         }
     }
 }
