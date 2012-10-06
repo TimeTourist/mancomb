@@ -14,13 +14,12 @@ namespace mancomb.Framework.Behaviours
 
         public DrawBehaviour(ref GraphicsDeviceManager gdm)
         {
-            this.gdm = gdm;
-            
+            this.gdm = gdm;  
         }
 
         public override void doBehaviour(IEntity parent)
         {
-            gdm.GraphicsDevice.Clear((Color)parent.getAttribute("color"));
+            gdm.GraphicsDevice.Clear(parent.getAttribute<Color>("color"));
         }
     }
 }

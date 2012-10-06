@@ -24,7 +24,7 @@ namespace mancomb.Framework.Behaviours
 
         public override void doBehaviour(IEntity parent)
         {
-            GameTime gameTime = (GameTime)parent.getAttribute("gameTime"); 
+            GameTime gameTime = parent.getAttribute<GameTime>("gameTime"); 
 
             fadeDelay -= gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -43,7 +43,7 @@ namespace mancomb.Framework.Behaviours
 
                 }
 
-                Color color = Color.Lerp((Color)parent.getAttribute("color"), goalColor, alphaValue);
+                Color color = Color.Lerp(parent.getAttribute<Color>("color"), goalColor, alphaValue);
                 parent.addAttribute("color", color);
                 
             }

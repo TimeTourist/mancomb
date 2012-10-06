@@ -39,12 +39,12 @@ namespace mancomb.Framework.Test
             {
                 BaseEntity entity = new BaseEntity();
                 IBehaviour mockBehaviour = (IBehaviour)new DynamicMock(typeof(IBehaviour));
-                entity.addBehaviour(1, mockBehaviour);
-                entity.addBehaviour(5, mockBehaviour);
-                entity.addBehaviour(4, mockBehaviour);
-                entity.addBehaviour(2, mockBehaviour);
-                entity.addBehaviour(3, mockBehaviour);
-                entity.runBehaviours();
+                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
+                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
+                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
+                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
+                entity.addBehaviour(GameLoopPhase.Draw, mockBehaviour);
+                // entity.runBehaviours();
                 Assert.AreEqual(entity, entity);
             }
         }

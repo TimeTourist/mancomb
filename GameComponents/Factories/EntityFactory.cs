@@ -18,9 +18,10 @@ namespace mancomb.GameComponents.Factories
         {
             IEntity background = new BaseEntity();
             background.addAttribute("color", Color.Yellow);
-            background.addBehaviour(10, new RandomColorBehaviour());
-            background.addBehaviour(20, new FadeColorBehaviour());
-            background.addBehaviour(100, new DrawBehaviour(ref graphics));
+            background.addAttribute("gameTime", new GameTime());
+            background.addBehaviour(GameLoopPhase.Update, new RandomColorBehaviour());
+            background.addBehaviour(GameLoopPhase.Update, new FadeColorBehaviour());
+            background.addBehaviour(GameLoopPhase.Draw, new DrawBehaviour(ref graphics));
             return background;
         }
 
@@ -48,7 +49,7 @@ namespace mancomb.GameComponents.Factories
             ship.addAttribute("Texture", Texture);
             
             //behaviours
-            ship.addBehaviour(100, new DrawTexture2DBehaviour(ref graphics));
+            ship.addBehaviour(GameLoopPhase.Draw, new DrawTexture2DBehaviour(ref graphics));
 
             return ship;
         }

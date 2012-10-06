@@ -115,6 +115,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntitiesManager.cs" />
+    <Compile Include="Framework\Exceptions\AttributesNeededByBehaviourException.cs" />
+    <Compile Include="Framework\Core\GameLoopPhase.cs" />
+    <Compile Include="GameComponents\Behaviours\XnaContentLoadingBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\DrawTexture2DBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\FadeColorBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\RandomColorBehaviour.cs" />

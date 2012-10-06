@@ -22,9 +22,9 @@ namespace mancomb.GameComponents.Behaviours
 
         public override void doBehaviour(IEntity parent)
         {
-            Texture2D Texture = parent.getTypedAttribute<Texture2D>("Texture");
-            Vector2 Pos = parent.getTypedAttribute<Vector2>("Pos");
-            float Direction = parent.getTypedAttribute<float>("Direction");
+            Texture2D Texture = parent.getAttribute<Texture2D>("Texture");
+            Vector2 Pos = parent.getAttribute<Vector2>("Pos");
+            float Direction = parent.getAttribute<float>("Direction");
            
             Vector2 origin = new Vector2(Texture.Width / 2, Texture.Height - Texture.Height / 3);
 

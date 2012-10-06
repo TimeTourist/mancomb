@@ -20,8 +20,7 @@ namespace mancomb
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        List<IEntity> entities = new List<IEntity>(); 
+        EntitiesManager entitiesManager;
 
         public Game1()
         {
@@ -37,9 +36,13 @@ namespace mancomb
         /// </summary>
         protected override void Initialize()
         {
-            entities.Add(EntityFactory.createBackground(ref graphics));
-            
-            entities.Add(EntityFactory.createShip(ref graphics, this.Content));
+            // create the entity manager
+            entitiesManager = new EntitiesManager();
+            // add some entities (Feature: load from script instead of factory)
+            entitiesManager.addEntity(EntityFactory.createBackground(ref graphics));
+            entitiesManager.addEntity(EntityFactory.createShip(ref graphics, this.Content));
+            // run the behaviours that want to run in this phase.
+            entitiesManager.run(GameLoopPhase.Initialize);
             
             base.Initialize();
             
@@ -51,8 +54,8 @@ namespace mancomb
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            
+            // run the behaviours that want to run in this phase.
+            entitiesManager.run(GameLoopPhase.LoadContent);
             
             // TODO: use this.Content to load your game content here
         }
@@ -63,7 +66,8 @@ namespace mancomb
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // run the behaviours that want to run in this phase.
+            entitiesManager.run(GameLoopPhase.UnloadContent);
         }
 
         /// <summary>
@@ -77,12 +81,14 @@ namespace mancomb
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            foreach (IEntity entity in entities)
-            {
-                entity.addAttribute("gameTime", gameTime);
-                entity.runBehaviours();
-            }
-            // TODO: Add your update logic here
+            // run the behaviours that want to run in this phase.
+            entitiesManager.run(GameLoopPhase.Update);
+        
+            // TODO: need to solve that gametime is needed in the behaviours.
+            // some links to that effect
+            // http://blog.diabolicalgame.co.uk/2011/12/gametime-in-another-thread.html
+            // http://xboxforums.create.msdn.com/forums/p/10587/457840.aspx
+
             base.Update(gameTime);
         }
 
@@ -92,7 +98,8 @@ namespace mancomb
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            // TODO: Add your drawing code here
+            // run the behaviours that want to run in this phase.
+            entitiesManager.run(GameLoopPhase.Draw);
             
             base.Draw(gameTime);
         }
