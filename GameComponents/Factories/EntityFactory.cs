@@ -47,6 +47,7 @@ namespace mancomb.GameComponents.Factories
             
             //behaviours
             ship.addBehaviour(GameLoopPhase.Update, new GameControllingBehavior());
+            ship.addBehaviour(GameLoopPhase.Update, new TemporaryGravityBehaviour());
             ship.addBehaviour(GameLoopPhase.Draw, new DrawTexture2DBehaviour());
 
             return ship;

@@ -33,6 +33,10 @@ namespace mancomb
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1680;
+            graphics.PreferredBackBufferHeight = 1050;
+            graphics.PreferMultiSampling = false;
+            graphics.IsFullScreen = true;
             // create the entity manager
             entitiesManager = new EntitiesManager(this);
             Content.RootDirectory = "Content";
@@ -49,6 +53,10 @@ namespace mancomb
         /// </summary>
         protected override void Initialize()
         {
+            // Set properties
+            this.IsFixedTimeStep = false;
+            
+     
             spriteBatch = new SpriteBatch(this.GraphicsDevice);
             // add some entities (Feature: load from script instead of factory)
             entitiesManager.addEntity(EntityFactory.createBackground(entitiesManager));
@@ -90,7 +98,8 @@ namespace mancomb
         protected override void Update(GameTime localGameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+                || Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
                 this.Exit();
 
             // run the behaviours that want to run in this phase.
