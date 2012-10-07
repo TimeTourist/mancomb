@@ -14,10 +14,7 @@ namespace mancomb
     /// </summary>
     class EntitiesManager
     {
-        /// <summary>
-        /// Entity list
-        /// </summary>
-        List<IEntity> entities;
+        Dictionary<GameState, List<IEntity>> scenes;
 
         public Game1 game
         {
@@ -28,19 +25,33 @@ namespace mancomb
         public EntitiesManager(Game1 game)
         {
             this.game = game;
-            entities = new List<IEntity>();
+            scenes = new Dictionary<GameState, List<IEntity>>();
         }
 
-        public void addEntity(IEntity entity)
+        public void addEntity(GameState state, IEntity entity)
         {
-            entities.Add(entity);
+            List<IEntity> entitiesTemp;
+            if (scenes.TryGetValue(state, out entitiesTemp))
+            {
+                entitiesTemp.Add(entity);
+            }
+            else
+            {
+                entitiesTemp = new List<IEntity>();
+                entitiesTemp.Add(entity);
+                scenes.Add(state, entitiesTemp);
+            } 
         }
 
         public void run(GameLoopPhase phase)
         {
-            foreach (IEntity entity in entities)
+            List<IEntity> entitiesTemp;
+            if (scenes.TryGetValue(game.currentState, out entitiesTemp))
             {
-                entity.runBehaviours(phase);
+                foreach (IEntity entity in entitiesTemp)
+                {
+                    entity.runBehaviours(phase);
+                }
             }
         }
 

@@ -21,34 +21,35 @@ namespace mancomb
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         public GraphicsDeviceManager graphics;
-        EntitiesManager level1EntitiesManager;
-        //EntitiesManager Menu
+
+        EntitiesManager entitiesManager;
+
+        public GameState currentState;
+
         public SpriteBatch spriteBatch;
-        // Reflection hack for accessing gameTime. Will it work?
+        // Reflection hack for accessing gameTime.
         public GameTime gameTime 
         {
             get; 
             private set;
         }
-        SpriteFont font;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
-            graphics.PreferMultiSampling = false;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 768;
+            //graphics.PreferMultiSampling = false;
             graphics.IsFullScreen = false;
-           
+
+            currentState = GameState.MainMenu;
             // create the entity manager
-            level1EntitiesManager = new EntitiesManager(this);
+            entitiesManager = new EntitiesManager(this);
+
             Content.RootDirectory = "Content";
             
             //Reflection hack for accessing gameTime. Will it work?
             gameTime = (GameTime)typeof(Game).GetField("gameTime", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(this);
-
-            //gameTime = new GameTime();
-            //base.Update(gameTime);
         }
 
         /// <summary>
@@ -65,13 +66,30 @@ namespace mancomb
             
      
             spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            //
+            // menu entity manager init
+            //
+            entitiesManager.addEntity(GameState.MainMenu, EntityFactory.createMenu(entitiesManager));
+            //menuEntitiesManager.addEntity();
+
+            //
+            // Level entity manager init
+            //
             // add some entities (Feature: load from script instead of factory)
-            level1EntitiesManager.addEntity(EntityFactory.createBackground(level1EntitiesManager));
-            level1EntitiesManager.addEntity(EntityFactory.createShip(level1EntitiesManager));
-            level1EntitiesManager.addEntity(EntityFactory.createDebugScreen(level1EntitiesManager));
-            // run the behaviours that want to run in this phase.
-            level1EntitiesManager.run(GameLoopPhase.Initialize);
+            entitiesManager.addEntity(GameState.Level1, EntityFactory.createBackground(entitiesManager));
+            entitiesManager.addEntity(GameState.Level1, EntityFactory.createShip(entitiesManager));
+            entitiesManager.addEntity(GameState.Level1, EntityFactory.createDebugScreen(entitiesManager));
             
+            
+            //
+            // Game exit
+            //
+            entitiesManager.addEntity(GameState.Exit, EntityFactory.createGameExit(entitiesManager));
+
+
+
+            // run the behaviours that want to run in this phase.
+            entitiesManager.run(GameLoopPhase.Initialize);
             base.Initialize();
             
         }
@@ -83,8 +101,7 @@ namespace mancomb
         protected override void LoadContent()
         {
             // run the behaviours that want to run in this phase.
-            level1EntitiesManager.run(GameLoopPhase.LoadContent);
-            
+            entitiesManager.run(GameLoopPhase.LoadContent);
             // TODO: use this.Content to load your game content here
 
         }
@@ -96,7 +113,8 @@ namespace mancomb
         protected override void UnloadContent()
         {
             // run the behaviours that want to run in this phase.
-            level1EntitiesManager.run(GameLoopPhase.UnloadContent);
+            entitiesManager.run(GameLoopPhase.UnloadContent);
+            
         }
 
         /// <summary>
@@ -108,11 +126,11 @@ namespace mancomb
         {
       
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
-                || Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
-                this.Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+            //    || Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
+            //    this.Exit();
             // run the behaviours that want to run in this phase.
-            level1EntitiesManager.run(GameLoopPhase.Update);
+            entitiesManager.run(GameLoopPhase.Update);
 
             base.Update(localGameTime);
         }
@@ -126,7 +144,8 @@ namespace mancomb
             // leaving this here for now...
             spriteBatch.Begin();
             // run the behaviours that want to run in this phase.
-            level1EntitiesManager.run(GameLoopPhase.Draw);
+            entitiesManager.run(GameLoopPhase.Draw);
+            
             spriteBatch.End();
             base.Draw(localGameTime);
         }

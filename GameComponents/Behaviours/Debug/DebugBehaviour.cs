@@ -23,6 +23,10 @@ namespace mancomb.GameComponents.Behaviours
             {
                 parent.getManager().game.graphics.SynchronizeWithVerticalRetrace = !parent.getManager().game.graphics.SynchronizeWithVerticalRetrace;
             }
+            if (keyboardState.GetPressedKeys().Contains(Keys.F))
+            {
+                parent.getManager().game.graphics.ToggleFullScreen();
+            }
             ds.Append("IsFixedTimeStep (Q to toggle): ");
             ds.Append(parent.getManager().game.IsFixedTimeStep);
             ds.AppendLine();
@@ -34,9 +38,11 @@ namespace mancomb.GameComponents.Behaviours
             ds.AppendLine();
             ds.Append("SynchronizeWithVerticalRetrace (W to toggle): ");
             ds.Append(parent.getManager().game.graphics.SynchronizeWithVerticalRetrace);
+            ds.AppendLine();
+            ds.Append("Toggle fullscreen (F to toggle): ");
             
 
-            parent.addAttribute("text", ds.ToString());
+            parent.addAttribute("debugText", ds.ToString());
         }
     }
 }

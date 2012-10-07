@@ -20,8 +20,9 @@ namespace mancomb.GameComponents.Factories
             background.addAttribute("color", Color.DarkGray);
             background.addAttribute("gameTime", new GameTime());
             background.addBehaviour(GameLoopPhase.Update, new RandomColorBehaviour());
-            background.addBehaviour(GameLoopPhase.Update, new FadeColorBehaviour());
+            // menu.addBehaviour(GameLoopPhase.Update, new FadeColorBehaviour());
             background.addBehaviour(GameLoopPhase.Draw, new DrawBehaviour());
+            background.addBehaviour(GameLoopPhase.Update, new GameStateChangingBehaviour(Keys.Escape, Buttons.Back, GameState.MainMenu));
             return background;
         }
 
@@ -42,7 +43,7 @@ namespace mancomb.GameComponents.Factories
             ship.addAttribute("Direction", Direction);
 
             //for drawing
-            Texture2D Texture = manager.game.Content.Load<Texture2D>("ship");
+            Texture2D Texture = manager.game.Content.Load<Texture2D>("molly");
             ship.addAttribute("Texture", Texture);
             
             //behaviours
@@ -57,12 +58,56 @@ namespace mancomb.GameComponents.Factories
         {
             IEntity debug = new BaseEntity(manager);
             SpriteFont font = manager.game.Content.Load<SpriteFont>("DebugFont");
-            debug.addAttribute("font", font);
-            debug.addAttribute("text", "Something");
-            debug.addBehaviour(GameLoopPhase.Draw, new DrawTextBehaviour());
+            String prefix = "debug";
+            debug.addAttribute(prefix + "Text", "Something");
+            debug.addAttribute(prefix + "Color", Color.White);
+            debug.addAttribute(prefix + "Position", new Vector2(40, 40));
+            debug.addBehaviour(GameLoopPhase.Draw, new DrawTextBehaviour(font, prefix));
             debug.addBehaviour(GameLoopPhase.Update, new DebugBehaviour());
 
             return debug;
+        }
+
+
+        internal static IEntity createMenu(EntitiesManager menuEntitiesManager)
+        {
+            IEntity menu = new BaseEntity(menuEntitiesManager);
+            SpriteFont MenuTitle = menuEntitiesManager.game.Content.Load<SpriteFont>("MenuTitle");
+            SpriteFont MenuItem = menuEntitiesManager.game.Content.Load<SpriteFont>("MenuItem");
+
+            String prefix = "menuTitle";
+            menu.addAttribute(prefix + "Text", "Menu");
+            menu.addAttribute(prefix + "Color", Color.White);
+            menu.addAttribute(prefix + "Position", new Vector2(40, 50));
+            menu.addBehaviour(GameLoopPhase.Draw, new DrawTextBehaviour(MenuTitle, prefix));
+
+            prefix = "menuItem1";
+            menu.addAttribute(prefix + "Text", "Play (A)");
+            menu.addAttribute(prefix + "Color", Color.Indigo);
+            menu.addAttribute(prefix + "Position", new Vector2(40, 90));
+            menu.addBehaviour(GameLoopPhase.Draw, new DrawTextBehaviour(MenuItem, prefix));
+
+            prefix = "menuItem2";
+            menu.addAttribute(prefix + "Text", "Quit <BACK");
+            menu.addAttribute(prefix + "Color", Color.Indigo);
+            menu.addAttribute(prefix + "Position", new Vector2(40, 120));
+            menu.addBehaviour(GameLoopPhase.Draw, new DrawTextBehaviour(MenuItem, prefix));
+
+            menu.addAttribute("color", Color.DarkOrchid);
+            menu.addBehaviour(GameLoopPhase.Draw, new DrawBehaviour());
+
+            menu.addBehaviour(GameLoopPhase.Update, new GameStateChangingBehaviour(Keys.Enter, Buttons.A, GameState.Level1));
+            menu.addBehaviour(GameLoopPhase.Update, new GameStateChangingBehaviour(Keys.Escape, Buttons.Back, GameState.Exit));
+
+            return menu;
+        }
+
+        public static IEntity createGameExit(EntitiesManager manager)
+        {
+            IEntity exit = new BaseEntity(manager);
+            exit.addBehaviour(GameLoopPhase.Update, new ExitBehaviour());
+
+            return exit;
         }
 
     }

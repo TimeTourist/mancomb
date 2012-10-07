@@ -116,7 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntitiesManager.cs" />
+    <Compile Include="Framework\Core\GameState.cs" />
     <Compile Include="Framework\Core\GameLoopPhase.cs" />
+    <Compile Include="GameComponents\Behaviours\GameStateChangingBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\Debug\DebugBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\DrawTextBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\GameControllingBehavior.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Framework\Core\IEntity.cs" />
     <Compile Include="Framework\Test\NativeTests.cs" />
     <Compile Include="GameComponents\Factories\EntityFactory.cs" />
+    <Compile Include="GameComponents\Behaviours\ExitBehaviour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

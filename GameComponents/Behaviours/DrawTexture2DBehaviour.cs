@@ -25,7 +25,9 @@ namespace mancomb.GameComponents.Behaviours
            
             Vector2 origin = new Vector2(Texture.Width / 2, Texture.Height - Texture.Height / 3);
 
-            parent.getManager().game.spriteBatch.Draw(Texture, Pos, null, Color.White, Direction, origin, 0.5f, SpriteEffects.None, 0f);
+            float size = 1f;
+
+            parent.getManager().game.spriteBatch.Draw(Texture, Pos, null, Color.White, Direction, origin, size, SpriteEffects.None, 0f);
 
         }
 

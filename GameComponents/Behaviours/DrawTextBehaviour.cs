@@ -10,11 +10,22 @@ namespace mancomb.GameComponents.Behaviours
 {
     class DrawTextBehaviour : BaseBehaviour
     {
+        private SpriteFont font;
+        private string textAttributeName;
+
+        public DrawTextBehaviour(SpriteFont font, string textAttributeName)
+        {
+            this.font = font;
+            this.textAttributeName = textAttributeName;
+        }
+
         public override void doBehaviour(IEntity parent)
         {
-            SpriteFont font = parent.getAttribute<SpriteFont>("font");
-            String text = parent.getAttribute<String>("text");
-            parent.getManager().game.spriteBatch.DrawString(font, text, new Vector2(20, 45), Color.White);
+            String text = parent.getAttribute<String>(textAttributeName+"Text");
+            Color color = parent.getAttribute<Color>(textAttributeName+"Color");
+            Vector2 position = parent.getAttribute<Vector2>(textAttributeName+"Position");
+ 
+            parent.getManager().game.spriteBatch.DrawString(font, text, position, color);
         }
     }
 }
