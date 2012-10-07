@@ -24,8 +24,13 @@ namespace mancomb.GameComponents.Behaviours
             String text = parent.getAttribute<String>(textAttributeName+"Text");
             Color color = parent.getAttribute<Color>(textAttributeName+"Color");
             Vector2 position = parent.getAttribute<Vector2>(textAttributeName+"Position");
+            float scale = parent.getAttribute<float>(textAttributeName + "Scale");
+            float rotation = parent.getAttribute<float>(textAttributeName + "Rotation");
  
-            parent.getManager().game.spriteBatch.DrawString(font, text, position, color);
+            //parent.getManager().game.spriteBatch.DrawString(font, text, position, color);
+            Vector2 origin = font.MeasureString(text) / 2;
+            position += origin;
+            parent.getManager().game.spriteBatch.DrawString(font, text, position, color, rotation, origin, scale, SpriteEffects.None, 0);
         }
     }
 }

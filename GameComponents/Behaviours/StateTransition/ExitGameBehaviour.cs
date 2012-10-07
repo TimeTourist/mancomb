@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using mancomb.Framework.Core;
 
-namespace mancomb.GameComponents.Factories
+namespace mancomb.GameComponents.Behaviours.StateTransition
 {
-    class ExitBehaviour : BaseBehaviour
+    class ExitGameBehaviour : BaseBehaviour
     {
         public override void doBehaviour(IEntity parent)
         {

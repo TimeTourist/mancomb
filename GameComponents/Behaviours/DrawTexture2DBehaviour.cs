@@ -19,15 +19,14 @@ namespace mancomb.GameComponents.Behaviours
         {
             // probably not a good place to have Textures... They get big, and are copied here, 
             // better have them stored somewhare for direct access.
-            Texture2D Texture = parent.getAttribute<Texture2D>("Texture");
-            Vector2 Pos = parent.getAttribute<Vector2>("Pos");
-            float Direction = parent.getAttribute<float>("Direction");
-           
-            Vector2 origin = new Vector2(Texture.Width / 2, Texture.Height - Texture.Height / 3);
+            Texture2D texture = parent.getAttribute<Texture2D>("texture");
+            Vector2 position = parent.getAttribute<Vector2>("position");
+            float direction = parent.getAttribute<float>("direction");
+            float scale = parent.getAttribute<float>("scale");
 
-            float size = 1f;
+            Vector2 origin = new Vector2(texture.Width / 2, texture.Height - texture.Height / 3);
 
-            parent.getManager().game.spriteBatch.Draw(Texture, Pos, null, Color.White, Direction, origin, size, SpriteEffects.None, 0f);
+            parent.getManager().game.spriteBatch.Draw(texture, position, null, Color.White, direction, origin, scale, SpriteEffects.None, 0f);
 
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 using mancomb.Framework.Core;
 using Microsoft.Xna.Framework.Input;
 
-namespace mancomb.GameComponents.Behaviours
+namespace mancomb.GameComponents.Behaviours.StateTransition
 {
     class GameStateChangingBehaviour : BaseBehaviour
     {

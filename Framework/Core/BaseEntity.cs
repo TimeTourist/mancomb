@@ -109,7 +109,14 @@ namespace mancomb.Framework.Core
         /// <returns>Attribute Value</returns>
         public T getAttribute<T>(string key)
         {
-             return (T)attributes[key];
+            try
+            {
+                return (T)attributes[key];
+            }
+            catch (KeyNotFoundException e)
+            {
+                throw (e);        
+            }
         }
 
         public void runBehaviours(GameLoopPhase phase)

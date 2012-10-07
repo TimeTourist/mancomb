@@ -14,15 +14,15 @@ namespace mancomb.GameComponents.Behaviours
     {
         public override void doBehaviour(IEntity parent)
         {
-            Vector2 Velocity = parent.getAttribute<Vector2>("Velocity");
-            Vector2 Pos = parent.getAttribute<Vector2>("Pos");
-            float Weight = parent.getAttribute<float>("Weight");
+            Vector2 velocity = parent.getAttribute<Vector2>("velocity");
+            Vector2 position = parent.getAttribute<Vector2>("position");
+            float weight = parent.getAttribute<float>("weight");
             // float timeSeconds = parent.getManager().game.gameTime.ElapsedGameTime.Milliseconds * 0.0001f;
-            Velocity = new Vector2(Velocity.X, Velocity.Y + (0.0076f));
-            Pos += Velocity;
-            parent.addAttribute("Velocity", Velocity);
-            parent.addAttribute("Pos", Pos);
-            parent.addAttribute("Weight", Weight);
+            velocity = new Vector2(velocity.X, velocity.Y + (weight));
+            position += velocity;
+            parent.addAttribute("velocity", velocity);
+            parent.addAttribute("position", position);
+            parent.addAttribute("weight", weight);
         }
     }
 }
