@@ -29,6 +29,8 @@ namespace mancomb.GameComponents.Behaviours
             }
             if (gamePadState.IsButtonDown(Buttons.A) || keyboardState.IsKeyDown(Keys.Up))
             {
+                //Velocity += AngleToVector(Direction) * new Vector2(0.3f, 0.3f);
+                //Pos += AngleToVector(Direction) * new Vector2(12.3f, 12.3f);
                 Velocity += AngleToVector(Direction) * new Vector2(0.3f, 0.3f);
             }
             if (gamePadState.IsButtonDown(Buttons.Y) || keyboardState.IsKeyDown(Keys.Space))

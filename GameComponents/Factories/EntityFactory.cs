@@ -17,7 +17,7 @@ namespace mancomb.GameComponents.Factories
         public static IEntity createBackground(EntitiesManager manager)
         {
             IEntity background = new BaseEntity(manager);
-            background.addAttribute("color", Color.Yellow);
+            background.addAttribute("color", Color.DarkGray);
             background.addAttribute("gameTime", new GameTime());
             background.addBehaviour(GameLoopPhase.Update, new RandomColorBehaviour());
             background.addBehaviour(GameLoopPhase.Update, new FadeColorBehaviour());
@@ -31,9 +31,9 @@ namespace mancomb.GameComponents.Factories
             Vector2 Pos = new Vector2();
             Pos.X = manager.game.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 8;
             Pos.Y = manager.game.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 8;
-            Vector2 Velocity = new Vector2();
             float Weight = 40f;
-            float Direction = 0;
+            float Direction = 0.0f;
+            Vector2 Velocity = new Vector2();
 
             // for controlling behaviour
             ship.addAttribute("Pos", Pos);
@@ -51,6 +51,18 @@ namespace mancomb.GameComponents.Factories
             ship.addBehaviour(GameLoopPhase.Draw, new DrawTexture2DBehaviour());
 
             return ship;
+        }
+
+        public static IEntity createDebugScreen(EntitiesManager manager)
+        {
+            IEntity debug = new BaseEntity(manager);
+            SpriteFont font = manager.game.Content.Load<SpriteFont>("DebugFont");
+            debug.addAttribute("font", font);
+            debug.addAttribute("text", "Something");
+            debug.addBehaviour(GameLoopPhase.Draw, new DrawTextBehaviour());
+            debug.addBehaviour(GameLoopPhase.Update, new DebugBehaviour());
+
+            return debug;
         }
 
     }

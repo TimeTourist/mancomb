@@ -20,8 +20,9 @@ namespace mancomb
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        EntitiesManager entitiesManager;
+        public GraphicsDeviceManager graphics;
+        EntitiesManager level1EntitiesManager;
+        //EntitiesManager Menu
         public SpriteBatch spriteBatch;
         // Reflection hack for accessing gameTime. Will it work?
         public GameTime gameTime 
@@ -29,20 +30,25 @@ namespace mancomb
             get; 
             private set;
         }
+        SpriteFont font;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1680;
-            graphics.PreferredBackBufferHeight = 1050;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.PreferMultiSampling = false;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
+           
             // create the entity manager
-            entitiesManager = new EntitiesManager(this);
+            level1EntitiesManager = new EntitiesManager(this);
             Content.RootDirectory = "Content";
             
-            // Reflection hack for accessing gameTime. Will it work?
+            //Reflection hack for accessing gameTime. Will it work?
             gameTime = (GameTime)typeof(Game).GetField("gameTime", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(this);
+
+            //gameTime = new GameTime();
+            //base.Update(gameTime);
         }
 
         /// <summary>
@@ -54,15 +60,17 @@ namespace mancomb
         protected override void Initialize()
         {
             // Set properties
-            this.IsFixedTimeStep = false;
+            this.IsFixedTimeStep = true;
+            graphics.SynchronizeWithVerticalRetrace = false;   
             
      
             spriteBatch = new SpriteBatch(this.GraphicsDevice);
             // add some entities (Feature: load from script instead of factory)
-            entitiesManager.addEntity(EntityFactory.createBackground(entitiesManager));
-            entitiesManager.addEntity(EntityFactory.createShip(entitiesManager));
+            level1EntitiesManager.addEntity(EntityFactory.createBackground(level1EntitiesManager));
+            level1EntitiesManager.addEntity(EntityFactory.createShip(level1EntitiesManager));
+            level1EntitiesManager.addEntity(EntityFactory.createDebugScreen(level1EntitiesManager));
             // run the behaviours that want to run in this phase.
-            entitiesManager.run(GameLoopPhase.Initialize);
+            level1EntitiesManager.run(GameLoopPhase.Initialize);
             
             base.Initialize();
             
@@ -75,9 +83,10 @@ namespace mancomb
         protected override void LoadContent()
         {
             // run the behaviours that want to run in this phase.
-            entitiesManager.run(GameLoopPhase.LoadContent);
+            level1EntitiesManager.run(GameLoopPhase.LoadContent);
             
             // TODO: use this.Content to load your game content here
+
         }
 
         /// <summary>
@@ -87,7 +96,7 @@ namespace mancomb
         protected override void UnloadContent()
         {
             // run the behaviours that want to run in this phase.
-            entitiesManager.run(GameLoopPhase.UnloadContent);
+            level1EntitiesManager.run(GameLoopPhase.UnloadContent);
         }
 
         /// <summary>
@@ -97,18 +106,13 @@ namespace mancomb
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime localGameTime)
         {
+      
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
                 || Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
                 this.Exit();
-
             // run the behaviours that want to run in this phase.
-            entitiesManager.run(GameLoopPhase.Update);
-        
-            // TODO: need to solve that gametime is needed in the behaviours.
-            // some links to that effect
-            // http://blog.diabolicalgame.co.uk/2011/12/gametime-in-another-thread.html
-            // http://xboxforums.create.msdn.com/forums/p/10587/457840.aspx
+            level1EntitiesManager.run(GameLoopPhase.Update);
 
             base.Update(localGameTime);
         }
@@ -122,7 +126,7 @@ namespace mancomb
             // leaving this here for now...
             spriteBatch.Begin();
             // run the behaviours that want to run in this phase.
-            entitiesManager.run(GameLoopPhase.Draw);
+            level1EntitiesManager.run(GameLoopPhase.Draw);
             spriteBatch.End();
             base.Draw(localGameTime);
         }

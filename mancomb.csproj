@@ -117,6 +117,8 @@
   <ItemGroup>
     <Compile Include="EntitiesManager.cs" />
     <Compile Include="Framework\Core\GameLoopPhase.cs" />
+    <Compile Include="GameComponents\Behaviours\Debug\DebugBehaviour.cs" />
+    <Compile Include="GameComponents\Behaviours\DrawTextBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\GameControllingBehavior.cs" />
     <Compile Include="GameComponents\Behaviours\TemporaryGravityBehaviour.cs" />
     <Compile Include="GameComponents\Behaviours\XnaContentLoadingBehaviour.cs" />
