@@ -29,15 +29,6 @@
       <Time>2012-10-07T19:03:21.9116962+02:00</Time>
     </Item>
     <Item>
-      <Source>molly.png</Source>
-      <Name>molly</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\KANELBULLE.COM\TimeTouristGames\mancomb\mancomb\mancomb\bin\x86\Debug\Content\molly.xnb</Output>
-      <Time>2012-10-07T15:36:23.2543897+02:00</Time>
-    </Item>
-    <Item>
       <Source>MenuTitle.spritefont</Source>
       <Name>MenuTitle</Name>
       <Importer>FontDescriptionImporter</Importer>

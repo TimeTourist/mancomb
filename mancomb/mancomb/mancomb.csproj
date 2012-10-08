@@ -116,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntitiesManager.cs" />
+    <Compile Include="Framework\Camera\Camera2D.cs" />
+    <Compile Include="Framework\Camera\IFocusable.cs" />
+    <Compile Include="Framework\Camera\ICamera2D.cs" />
     <Compile Include="Framework\Core\GameState.cs" />
     <Compile Include="Framework\Core\GameLoopPhase.cs" />
     <Compile Include="GameComponents\Behaviours\DrawFilledRectangleBehaviour.cs" />
