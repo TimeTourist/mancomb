@@ -23,7 +23,7 @@ namespace mancomb.Framework.Core
 
         /// <summary>
         /// Behaviours change attributes of an entity. They may also broadcast game 
-        /// events to entities that have subscribed to them. 
+        /// messages to entities that have subscribed to them. 
         /// </summary>
         Dictionary<GameLoopPhase, List<IBehaviour>> behaviours = new Dictionary<GameLoopPhase, List<IBehaviour>>();
 
