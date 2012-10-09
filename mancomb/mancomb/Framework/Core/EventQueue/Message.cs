@@ -5,10 +5,10 @@ using System.Text;
 
 namespace mancomb.Framework.Core
 {
-    class BaseMessage : IMessage
+    class Message : IMessage
     {
         object data;
-        public BaseMessage(object data)
+        public Message(object data)
         {
            this.data = data;
         }

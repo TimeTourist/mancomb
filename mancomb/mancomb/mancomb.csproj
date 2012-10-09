@@ -119,6 +119,8 @@
     <Compile Include="Framework\Camera\Camera2D.cs" />
     <Compile Include="Framework\Camera\IFocusable.cs" />
     <Compile Include="Framework\Camera\ICamera2D.cs" />
+    <Compile Include="Framework\Core\EventQueue\Message.cs" />
+    <Compile Include="Framework\Core\EventQueue\IMessage.cs" />
     <Compile Include="Framework\Core\GameState.cs" />
     <Compile Include="Framework\Core\GameLoopPhase.cs" />
     <Compile Include="GameComponents\Behaviours\DrawFilledRectangleBehaviour.cs" />
@@ -145,7 +147,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Framework\Core\EventQueue\Subscriber.cs" />
-    <Compile Include="Framework\Core\EventQueue\EventQueueManager.cs" />
+    <Compile Include="Framework\Core\EventQueue\MessageBroker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

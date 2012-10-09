@@ -45,14 +45,13 @@ namespace mancomb
 
         public void run(GameLoopPhase phase)
         {
-            List<IEntity> entitiesTemp;
-            if (scenes.TryGetValue(game.currentState, out entitiesTemp))
+            // Linq skillz ;)
+            foreach (IEntity entity in scenes
+                    .Where(x => x.Key == game.currentState)
+                    .SelectMany(x => x.Value))
             {
-                foreach (IEntity entity in entitiesTemp)
-                {
-                    entity.runBehaviours(phase);
-                }
-            }
+                entity.runBehaviours(phase);
+            } 
         }
 
 

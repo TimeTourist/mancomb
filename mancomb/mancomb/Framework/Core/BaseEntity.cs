@@ -45,7 +45,6 @@ namespace mancomb.Framework.Core
 
         public void addBehaviour(GameLoopPhase phase, IBehaviour behaviourToAdd)
         {
-
             Debug.Assert(verifyAttributes(behaviourToAdd), getMissingAttributes(behaviourToAdd));
 
             List<IBehaviour> entityBehaviours;
@@ -61,6 +60,47 @@ namespace mancomb.Framework.Core
             } 
         }
 
+        /// <summary>
+        /// overwrits value if same key is used
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
+        public void addAttribute(String key, Object value)
+        {
+            attributes[key] = value;
+        }
+
+        /// <summary>
+        /// Get a key of Type T
+        /// </summary>
+        /// <typeparam name="T">Class type</typeparam>
+        /// <param name="key">Attribute key</param>
+        /// <returns>Attribute Value</returns>
+        public T getAttribute<T>(string key)
+        {
+            try
+            {
+                // todo: try using TryGetValue, and see if reference is sent... 
+                return (T)attributes[key];
+            }
+            catch (KeyNotFoundException e)
+            {
+                throw (e);        
+            }
+        }
+
+        public void runBehaviours(GameLoopPhase phase)
+        {
+            foreach (IBehaviour behaviour in behaviours
+                    .Where(x => x.Key == phase)
+                    .SelectMany(x => x.Value))
+            {
+                behaviour.doBehaviour(this);
+            } 
+        }
+
+        /// --------------- Lab ----------------
+        /// 
         /// <summary>
         /// It might be a good idea to verify that an Entity has all the Attributes the Behaviour needs.
         /// Using this debug we will notice this early, instead of getting a key not found later... 
@@ -90,47 +130,5 @@ namespace mancomb.Framework.Core
         {
             return "Missing some attributes for behaviour of type: " + behaviourToAdd.GetType().FullName;
         }
-
-        /// <summary>
-        /// overwrits value if same key is used
-        /// </summary>
-        /// <param name="key">key</param>
-        /// <param name="value">value</param>
-        public void addAttribute(String key, Object value)
-        {
-            attributes[key] = value;
-        }
-
-        /// <summary>
-        /// Get a key of Type T
-        /// </summary>
-        /// <typeparam name="T">Class type</typeparam>
-        /// <param name="key">Attribute key</param>
-        /// <returns>Attribute Value</returns>
-        public T getAttribute<T>(string key)
-        {
-            try
-            {
-                return (T)attributes[key];
-            }
-            catch (KeyNotFoundException e)
-            {
-                throw (e);        
-            }
-        }
-
-        public void runBehaviours(GameLoopPhase phase)
-        {
-            List<IBehaviour> entityBehaviours;
-            if (behaviours.TryGetValue(phase, out entityBehaviours))
-            {
-                foreach (IBehaviour behaviour in entityBehaviours)
-                {
-                    behaviour.doBehaviour(this);
-                }   
-            }
-        }
-
-
     }
 }

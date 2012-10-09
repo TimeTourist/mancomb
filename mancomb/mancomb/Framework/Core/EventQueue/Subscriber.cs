@@ -4,9 +4,9 @@ namespace mancomb.Framework.Core
 {
 	public class Subscriber : ISubscriber
 	{
-		void onMessage ()
+        public void handleMessage(IMessage message)
 		{
-			int lasse = 2;
+            int lasse = message.getData<int>();
 		}
 	}
 }
